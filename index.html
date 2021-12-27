@@ -518,7 +518,7 @@ let bibles = ["起初神创造天地。(创 1:1)",
 //等同于onReady
 $(function(){
 	var churchName = getParam("church")
-	$("#church").html(decodeURI(churchName?churchName+"<br>":""))
+	$("#church").html(churchName?(decodeURI(churchName)+"<br>"):"")
 });
 //核心函数
 function run() {
