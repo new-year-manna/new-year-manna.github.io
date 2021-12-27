@@ -1,8 +1,8 @@
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <meta charset="UTF-8"/>
 <title>2022新年玛娜</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <link rel="stylesheet" href="bootstrap.min.css">
 <link rel="stylesheet" href="buttons.min.css">
 <style>
@@ -517,7 +517,8 @@ let bibles = ["起初神创造天地。(创 1:1)",
 "证明这事的说：“是了。我必快来。” 阿们！主耶稣啊，我愿你来！(启 22:20)"]
 //等同于onReady
 $(function(){
-	$("#church").text(decodeURI(getParam("church")+"<br>"))
+	var churchName = getParam("church")
+	$("#church").html(decodeURI(churchName?churchName+"<br>":""))
 });
 //核心函数
 function run() {
@@ -529,7 +530,7 @@ function run() {
 }
 //显示旋转的logo
 function showRotatingImage() {
-	// 图标来自bible.com
+	//图标来自bible.com
 	$("#result").html("<img class='Rotation' src='bible.png' width='100' height='100'/>");
 }
 //从url中提取参数
@@ -543,7 +544,7 @@ function getParam(variable)
 			return pair[1];
 		}
    }
-   return("");
+   return(false);
 }
 </script>
 </head>
