@@ -517,7 +517,7 @@ let bibles = ["起初神创造天地。(创 1:1)",
 "证明这事的说：“是了。我必快来。” 阿们！主耶稣啊，我愿你来！(启 22:20)"]
 //等同于onReady
 $(function(){
-	$("#church").text(decodeURI(getParam("church")))
+	$("#church").text(decodeURI(getParam("church")+"<br>"))
 });
 //核心函数
 function run() {
@@ -554,7 +554,7 @@ function getParam(variable)
                 onclick="run()">随机抽取!
         </button>
     </div>
-    <b><div id="result" style="margin-top:11vh;margin-bottom:3vh;font-size:x-large">
+    <b><div id="result" style="margin-top:9vh;margin-bottom:3vh;font-size:x-large">
         <div style="height: 1vh"></div>
     </div></b>
 </div>
