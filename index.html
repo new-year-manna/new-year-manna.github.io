@@ -515,23 +515,20 @@ let bibles = ["起初神创造天地。(创 1:1)",
 "他又对我说：“都成了。我是阿拉法，我是俄梅戛；我是初，我是终。我要将生命泉的水白白赐给那口渴的人喝。” (启 21:6)",
 "看哪！我必快来。凡遵守这书上预言的有福了。(启 22:7)",
 "证明这事的说：“是了。我必快来。” 阿们！主耶稣啊，我愿你来！(启 22:20)"]
-//等同于onReady
+// 页面加载时被调用
 $(function(){
+	$(".Rotation").hide();
 	var churchName = getParam("church")
-	$("#church").html(churchName?(decodeURI(churchName)+"<br>"):"")
+	$("#church").html(decodeURI(churchName?churchName+"<br>":""))
 });
 //核心函数
 function run() {
 	$("#random").hide()
-	showRotatingImage()
+	$(".Rotation").show();
 	setTimeout(function () {
+		$(".Rotation").hide();
 		$("#result").html(bibles[Math.floor((Math.random()*bibles.length))])
 	}, 2000);
-}
-//显示旋转的logo
-function showRotatingImage() {
-	//图标来自bible.com
-	$("#result").html("<img class='Rotation' src='bible.png' width='100' height='100'/>");
 }
 //从url中提取参数
 function getParam(variable)
@@ -552,13 +549,13 @@ function getParam(variable)
 <div class="container" style="text-align: center">
     <h1 id="conference_title" style="margin-top: 15vh;font-size: 350%; font-weight: bold;text-align:center;margin-bottom: 6vh"><span id="church"></span>2022年新年玛娜</h1>
     <div class="row" style="margin-top: 15vh;margin-bottom: 5vh;text-align: center">
-        <button class="button button-3d button-primary button-pill button-large" id="random" style="text-align:center;font-size: x-large;"
-                onclick="run()">随机抽取!
+        <button class="button button-3d button-primary button-pill button-large" id="random" style="text-align:center;font-size: x-large;" onclick="run()">随机抽取!
         </button>
     </div>
-    <b><div id="result" style="margin-top:9vh;margin-bottom:3vh;font-size:x-large">
+    <b><div id="result" style="margin-top:10vh;margin-bottom:3vh;font-size:x-large">
         <div style="height: 1vh"></div>
     </div></b>
+    <img class='Rotation' src='bible.png' width='100' height='100'/>
 </div>
 </body>
 </html>
