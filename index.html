@@ -524,11 +524,13 @@ $(function(){
 	let year = new Date().getFullYear()
 	// 如果是12月（getMonth从0开始），就显示下一年
 	$("#year").html(new Date().getMonth() == 11 ? year + 1 : year)
-	// 如果有随机过，就读取并显示
 	let text = loadText()
+	// 如果有随机过，就读取并显示
 	if(text){
 		$("#random").hide()
-		$("#result").html(text)
+		showText(text)
+	} else {
+		$("#reset").hide();
 	}
 });
 //核心函数
@@ -539,8 +541,12 @@ function run() {
 		$(".Rotation").hide();
 		text = bibles[Math.floor((Math.random() * bibles.length))]
 		saveText(text)
-		$("#result").html(text)
+		showText(text)
 	}, 2000);
+}
+function showText(text){
+	$("#reset").show();
+	$("#result").html(text)
 }
 //从url中提取参数
 function getParam(variable){
@@ -561,9 +567,14 @@ function saveText(text){
 }
 function loadText(){
 	if (document.cookie.length <= 0) {
+		console.log("nocookie")
 		return null
 	}
 	return decodeURIComponent(document.cookie.split('; ')[0].split('=')[1])
+}
+function reset(){
+	document.cookie = "text=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+	location.reload();
 }
 </script>
 </head>
@@ -577,6 +588,8 @@ function loadText(){
     <b><div id="result" style="margin-left: 2vh; margin-right: 2vh; margin-top:10vh;margin-bottom:3vh;font-size:x-large">
         <div style="height: 1vh"></div>
     </div></b>
+    <button class="button button-3d button-primary button-pill" id="reset" style="text-align:center;font-size: x-large;" onclick="reset()">重置
+    </button>
     <!-- 图标来自bible.com -->
     <img class='Rotation' src='bible.png' width='100' height='100'/>
 </div>
