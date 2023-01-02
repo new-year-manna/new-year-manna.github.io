@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta charset="UTF-8"/>
-<title>2023新年吗哪</title>
+<title>新年吗哪</title>
 <meta author="zhbzhbzhbz199102@gmail.com">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <link rel="stylesheet" href="bootstrap.min.css">
@@ -520,7 +520,15 @@ let bibles = ["起初神创造天地。(创 1:1)",
 $(function(){
 	$(".Rotation").hide();
 	var churchName = getParam("church")
-	$("#church").html(decodeURI(churchName?churchName+"<br>":""))
+	$("#church").html(decodeURI(churchName ? churchName + "<br>" : ""))
+	let year = new Date().getFullYear()
+	// 如果是12月（getMonth从0开始），就显示下一年
+	$("#year").html(new Date().getMonth() == 11 ? year + 1 : year)
+	let text = loadText()
+	if(text){
+		$("#random").hide()
+		$("#result").html(text)
+	}
 });
 //核心函数
 function run() {
@@ -528,12 +536,13 @@ function run() {
 	$(".Rotation").show();
 	setTimeout(function () {
 		$(".Rotation").hide();
-		$("#result").html(bibles[Math.floor((Math.random()*bibles.length))])
+		text = bibles[Math.floor((Math.random() * bibles.length))]
+		saveText(text)
+		$("#result").html(text)
 	}, 2000);
 }
 //从url中提取参数
-function getParam(variable)
-{
+function getParam(variable){
 	var query = window.location.search.substring(1);
 	var vars = query.split("&");
 	for (var i=0;i<vars.length;i++) {
@@ -543,6 +552,18 @@ function getParam(variable)
 		}
 	}
 	return(false);
+}
+function saveText(text){
+	let exdate = new Date()
+	exdate.setTime(exdate.getTime() + 30 * 24 * 60 * 60 * 1000) // 保存一个月
+	document.cookie = 'text=' + encodeURIComponent(text) + ';path=/;expires=' + exdate.toGMTString()
+}
+function loadText(){
+	if (document.cookie.length <= 0) {
+		console.log("nocookie")
+		return null
+	}
+	return decodeURIComponent(document.cookie.split('; ')[0].split('=')[1])
 }
 </script>
 </head>
