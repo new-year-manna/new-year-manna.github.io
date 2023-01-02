@@ -524,6 +524,7 @@ $(function(){
 	let year = new Date().getFullYear()
 	// 如果是12月（getMonth从0开始），就显示下一年
 	$("#year").html(new Date().getMonth() == 11 ? year + 1 : year)
+	// 如果有随机过，就读取并显示
 	let text = loadText()
 	if(text){
 		$("#random").hide()
@@ -560,7 +561,6 @@ function saveText(text){
 }
 function loadText(){
 	if (document.cookie.length <= 0) {
-		console.log("nocookie")
 		return null
 	}
 	return decodeURIComponent(document.cookie.split('; ')[0].split('=')[1])
